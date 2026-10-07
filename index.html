@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Watercolor Seascape Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a3a52;
+            --cream: #faf6f1;
+            --gold: #d4af37;
+            --sea-blue: #2a7da3;
+            --white: #ffffff;
+            --light-gray: #f8f6f3;
+            --text-dark: #2d3436;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f3f0 0%, #f9f7f4 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .logo {
+            font-size: 60px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            color: var(--gold);
+            font-size: 1.1em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .progress-header {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        .day-counter {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--navy);
+        }
+
+        .day-counter span {
+            color: var(--gold);
+        }
+
+        .streak {
+            text-align: center;
+            background: linear-gradient(135deg, #fff9e6, #ffe8c1);
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid var(--gold);
+        }
+
+        .streak-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: var(--navy);
+        }
+
+        .streak-label {
+            color: var(--navy);
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e8e8e8;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--sea-blue) 100%);
+            transition: width 0.6s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 30px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            margin-bottom: 16px;
+            font-size: 1.3em;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        button {
+            padding: 13px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        button:hover:not(:disabled) {
+            border-color: var(--gold);
+            background: #fff9e6;
+            transform: translateY(-2px);
+        }
+
+        button.active {
+            background: linear-gradient(135deg, var(--gold), #f0c040);
+            border-color: var(--gold);
+            color: var(--navy);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .mode-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .mood-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-mood {
+            padding: 11px 15px;
+            font-size: 0.9em;
+        }
+
+        /* Quote Card */
+        .quote-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(42, 125, 163, 0.08));
+            border: 2px solid var(--gold);
+            padding: 24px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .quote-card h3 {
+            opacity: 0.7;
+            font-size: 1em;
+            margin-bottom: 14px;
+        }
+
+        .quote-text {
+            font-size: 1.1em;
+            color: var(--navy);
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .prompt-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+
+        .mood-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fff9e6, #ffe8c1);
+            color: var(--navy);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 20px;
+            border: 1px solid var(--gold);
+        }
+
+        .prompt-text {
+            background: var(--light-gray);
+            padding: 24px;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+            margin-bottom: 24px;
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .time-allocation {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--sea-blue);
+        }
+
+        .time-allocation h4 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .time-breakdown {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Colors Section */
+        .colors-section {
+            margin-bottom: 24px;
+        }
+
+        .colors-section h4 {
+            color: var(--navy);
+            margin-bottom: 16px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 14px;
+        }
+
+        .color-swatch {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-4px);
+        }
+
+        .color-sample {
+            width: 100%;
+            height: 60px;
+        }
+
+        .color-info {
+            padding: 10px;
+            background: var(--light-gray);
+            text-align: center;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 0.85em;
+            margin-bottom: 3px;
+        }
+
+        .color-hex {
+            font-family: 'Courier New', monospace;
+            color: #999;
+            font-size: 0.75em;
+        }
+
+        /* References Section */
+        .reference-section {
+            margin-bottom: 24px;
+        }
+
+        .reference-section h4 {
+            color: var(--navy);
+            margin-bottom: 14px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .reference-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+        }
+
+        .reference-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            background: var(--white);
+            border: 1px solid #e8e8e8;
+        }
+
+        .reference-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+        }
+
+        .reference-image-wrapper {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, var(--gold), var(--sea-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reference-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reference-info {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .reference-time {
+            font-size: 0.8em;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+        }
+
+        .reference-link {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            padding: 7px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+
+        .reference-link:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #f0c040);
+            color: var(--navy);
+            padding: 14px 24px;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--navy);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(26, 58, 82, 0.2);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 58, 82, 0.3);
+        }
+
+        /* Timer */
+        .timer-display {
+            background: linear-gradient(135deg, var(--navy), var(--sea-blue));
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+            box-shadow: 0 6px 20px rgba(26, 58, 82, 0.2);
+        }
+
+        .timer-display.active {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .timer-time {
+            font-family: 'Courier New', monospace;
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .timer-label {
+            font-size: 1em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .timer-controls button {
+            padding: 9px 16px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            font-size: 0.8em;
+        }
+
+        .timer-controls button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Messages */
+        .completion-message {
+            background: linear-gradient(135deg, #fff9e6, #ffe8c1);
+            color: var(--navy);
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+            font-weight: 600;
+            border: 2px solid var(--gold);
+        }
+
+        .completion-message.show {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .locked-badge {
+            background: #999;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti-celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .prompt-title {
+                font-size: 1.4em;
+            }
+
+            .action-buttons, .mode-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .palette, .reference-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti-celebration" id="confetti"></div>
+
+    <header>
+        <div class="logo">🌊</div>
+        <h1>30-Day Seascape Challenge</h1>
+        <p class="tagline">Let nothing stop you from painting</p>
+    </header>
+
+    <div class="progress-section">
+        <div class="progress-header">
+            <div class="day-counter">Day <span id="currentDay">1</span>/30</div>
+            <div class="streak">
+                <div class="streak-number" id="streakCount">0</div>
+                <div class="streak-label">Completed</div>
+            </div>
+            <div></div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <div class="progress-text"><span id="progressPercent">0</span>% Complete</div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="card">
+                <h3>⏱️ Time Available</h3>
+                <div class="button-group" id="timeGroup">
+                    <button class="btn-time" data-time="15">15 minutes</button>
+                    <button class="btn-time" data-time="30">30 minutes</button>
+                    <button class="btn-time" data-time="45">45 minutes</button>
+                    <button class="btn-time" data-time="60">60 minutes</button>
+                </div>
+            </div>
+
+            <!-- Mode Selection (appears after time selected) -->
+            <div class="card" id="modeCard" style="display: none;">
+                <h3>🎨 Choose Your Path</h3>
+                <div class="mode-buttons" id="modeGroup">
+                    <button class="btn-mode" data-mode="inspire">✨ Inspire Me</button>
+                    <button class="btn-mode" data-mode="practice">🎯 Practice Skills</button>
+                </div>
+            </div>
+
+            <!-- Mood Selection (appears for Inspire Me) -->
+            <div class="card" id="moodCard" style="display: none;">
+                <h3>🌙 Pick a Mood</h3>
+                <div class="mood-buttons" id="moodGroup">
+                    <button class="btn-mood active" data-mood="calm">Calm</button>
+                    <button class="btn-mood" data-mood="moody">Moody</button>
+                    <button class="btn-mood" data-mood="aesthetic">Aesthetic</button>
+                </div>
+            </div>
+
+            <div class="card quote-card">
+                <h3>Today's Inspiration</h3>
+                <div class="quote-text" id="dailyQuote">Practice is progress. Keep painting.</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent"></div>
+    </div>
+
+    <script>
+        // Reference Images Data
+        const referenceImages = {
+            calm: {
+                15: [
+                    { url: "https://unsplash.com/photos/cfR-V1QuEKw", time: "15 min" },
+                    { url: "https://unsplash.com/photos/OyXmO9c56Mw", time: "15 min" }
+                ],
+                30: [
+                    { url: "https://unsplash.com/photos/r4lZQYyNWoM", time: "30 mins" },
+                    { url: "https://unsplash.com/photos/628EZatnEx0", time: "30 mins" }
+                ],
+                45: [
+                    { url: "https://unsplash.com/photos/1HMl4gY9bl4", time: "45 mins" },
+                    { url: "https://unsplash.com/photos/XA8xxmPdMZY", time: "45 mins" }
+                ],
+                60: [
+                    { url: "https://unsplash.com/photos/Nhs0sLAn1Is", time: "60 mins" },
+                    { url: "https://unsplash.com/photos/G8Fy93Jwfl8", time: "60 mins" }
+                ]
+            },
+            moody: {
+                15: [
+                    { url: "https://unsplash.com/photos/h_4fe8fmb1E", time: "15 min" },
+                    { url: "https://unsplash.com/photos/loZ_0TCJNUY", time: "15 min" }
+                ],
+                30: [
+                    { url: "https://unsplash.com/photos/f1-eNpVAdPQ", time: "30 mins" },
+                    { url: "https://unsplash.com/photos/HcGKcMOMJIU", time: "30 mins" }
+                ],
+                45: [
+                    { url: "https://unsplash.com/photos/zlv1KcbCMLs", time: "45 mins" },
+                    { url: "https://unsplash.com/photos/OrSRQ9ChLGM", time: "45 mins" }
+                ],
+                60: [
+                    { url: "https://unsplash.com/photos/-fTaw03pNhM", time: "60 mins" },
+                    { url: "https://unsplash.com/photos/4kT4vF0s1eA", time: "60 mins" }
+                ]
+            },
+            aesthetic: {
+                15: [
+                    { url: "https://unsplash.com/photos/egSqtHrxKDQ", time: "15 min" },
+                    { url: "https://unsplash.com/photos/2M_sDJ_agvs", time: "15 min" }
+                ],
+                30: [
+                    { url: "https://unsplash.com/photos/DtbtGv_TV2s", time: "30 mins" },
+                    { url: "https://unsplash.com/photos/PmFqylWSOzM", time: "30 mins" }
+                ],
+                45: [
+                    { url: "https://unsplash.com/photos/H3U5XvrHs3I", time: "45 mins" },
+                    { url: "https://unsplash.com/photos/WnRzNSJS1S4", time: "45 mins" }
+                ],
+                60: [
+                    { url: "https://unsplash.com/photos/zQl38TZXF-A", time: "60 mins" },
+                    { url: "https://unsplash.com/photos/dWKfRXR2Co0", time: "60 mins" }
+                ]
+            }
+        };
+
+        // Skill Sets by Time
+        const skillsByTime = {
+            15: ["Color Mixing", "Color Swatching", "Wash Techniques (Wet-on-Wet, Wet-on-Dry, Variegated, Graded)"],
+            30: ["Glazing", "Layering"],
+            45: ["Value Study"],
+            60: ["Perspective Sketch", "Value Study"]
+        };
+
+        // Challenge Data (30 days) - abbreviated for space
+        const challenges = [
+            { day: 1, title: "Golden Hour Over Water", description: "Paint a seascape with the sun low on the horizon, casting warm golden light across calm waves.", timeReqs: { 15: "Focus on sky and reflection", 30: "Add horizon details", 45: "Include foreground rocks", 60: "Complete composition" }, colors: [{ name: "Sunset Gold", hex: "#F5A623" }, { name: "Coral Pink", hex: "#FF6B9D" }, { name: "Ocean Blue", hex: "#4A90E2" }] },
+            { day: 2, title: "Misty Morning Seascape", description: "Create a soft, atmospheric seascape with gentle mist rolling over calm waters.", timeReqs: { 15: "Basic wet-on-wet wash", 30: "Add subtle horizon", 45: "Layer soft details", 60: "Full atmospheric depth" }, colors: [{ name: "Pale Grey", hex: "#B8B8B8" }, { name: "Soft Blue", hex: "#A8C8E1" }, { name: "Cream", hex: "#FAF6F1" }] },
+            { day: 3, title: "Dramatic Wave Study", description: "Paint an action-filled seascape featuring breaking waves with bold brushwork.", timeReqs: { 15: "Wave silhouette", 30: "Add spray detail", 45: "Create depth and layers", 60: "Full dramatic composition" }, colors: [{ name: "Deep Navy", hex: "#1A3A52" }, { name: "Slate Grey", hex: "#6C7A89" }, { name: "Sea Green", hex: "#2D9B96" }] },
+            { day: 4, title: "Stormy Seascape", description: "Explore moody atmospheric conditions with dark clouds and turbulent waters.", timeReqs: { 15: "Sky foundation", 30: "Cloud drama", 45: "Turbulent water", 60: "Full stormy scene" }, colors: [{ name: "Storm Grey", hex: "#556A7B" }, { name: "Dark Indigo", hex: "#3A5270" }, { name: "Thunder Black", hex: "#2C3E50" }] },
+            { day: 5, title: "Tropical Paradise Waters", description: "Paint vibrant tropical waters with visible color gradations from turquoise to deeper blues.", timeReqs: { 15: "Color gradation", 30: "Water depth play", 45: "Reef details", 60: "Full tropical composition" }, colors: [{ name: "Turquoise", hex: "#40E0D0" }, { name: "Tropical Blue", hex: "#0099CC" }, { name: "Coral Reef", hex: "#FF7F50" }] },
+            { day: 6, title: "Minimalist Horizon", description: "Simplify to essentials: sky, water, and horizon line to convey peace.", timeReqs: { 15: "Two-color wash", 30: "Add horizon", 45: "Subtle texture", 60: "Refined minimalism" }, colors: [{ name: "Pale Sky", hex: "#E8D5B3" }, { name: "Soft Water", hex: "#B8D4E8" }, { name: "Accent Grey", hex: "#8B7D6B" }] },
+            { day: 7, title: "Moonlit Ocean", description: "Paint a nocturnal seascape with moonlight reflecting on still water.", timeReqs: { 15: "Moon and reflection", 30: "Water depth", 45: "Atmospheric details", 60: "Full night seascape" }, colors: [{ name: "Midnight Blue", hex: "#0F1A2E" }, { name: "Moon Silver", hex: "#E8E8E8" }, { name: "Deep Teal", hex: "#1B4965" }] },
+            { day: 8, title: "Rocky Coastline", description: "Incorporate dramatic rock formations or cliffs into your seascape.", timeReqs: { 15: "Rock shapes", 30: "Water interaction", 45: "Detailed texturing", 60: "Full coastal scene" }, colors: [{ name: "Rock Brown", hex: "#6B4423" }, { name: "Sea Blue", hex: "#2D5A7B" }, { name: "Stone Grey", hex: "#8B7D6B" }] },
+            { day: 9, title: "Sunset Reflection", description: "Paint the golden light of sunset and its reflection in water.", timeReqs: { 15: "Sky gradient", 30: "Reflection mirror", 45: "Shore details", 60: "Complete sunset scene" }, colors: [{ name: "Deep Orange", hex: "#FF8C42" }, { name: "Magenta", hex: "#D2465F" }, { name: "Sky Violet", hex: "#8B7BA8" }] },
+            { day: 10, title: "Gentle Waves & Beach", description: "Paint shallow waves rolling onto a beach with translucent water.", timeReqs: { 15: "Wave shapes", 30: "Beach texture", 45: "Foam details", 60: "Full beach scene" }, colors: [{ name: "Wave Blue", hex: "#6FA8DC" }, { name: "Beach Sand", hex: "#E8D5B3" }, { name: "Ocean Deep", hex: "#4A7BA7" }] },
+            { day: 11, title: "Fog & Atmosphere", description: "Explore foggy seascapes where water and sky blur together.", timeReqs: { 15: "Atmospheric wash", 30: "Value layers", 45: "Subtle distinctions", 60: "Complex fog layers" }, colors: [{ name: "Mist White", hex: "#F5F5F5" }, { name: "Fog Grey", hex: "#D3D3D3" }, { name: "Steel Blue", hex: "#70909C" }] },
+            { day: 12, title: "Pier or Dock Study", description: "Paint a seascape featuring a pier with reflections in the water.", timeReqs: { 15: "Structure lines", 30: "Reflection play", 45: "Water details", 60: "Full perspective scene" }, colors: [{ name: "Wood Brown", hex: "#8B6F47" }, { name: "Water Reflection", hex: "#5A7FA8" }, { name: "Weathered Grey", hex: "#9FA9AE" }] },
+            { day: 13, title: "Island Seascape", description: "Paint a seascape with a distant island or landmass.", timeReqs: { 15: "Island silhouette", 30: "Water separation", 45: "Atmospheric depth", 60: "Complete island scene" }, colors: [{ name: "Island Green", hex: "#4A7C3B" }, { name: "Water Turquoise", hex: "#2A9D8F" }, { name: "Sky Blue", hex: "#A8D8EA" }] },
+            { day: 14, title: "Sailboat Scene", description: "Add a sailboat to your seascape and balance its focal point.", timeReqs: { 15: "Boat silhouette", 30: "Sail definition", 45: "Full boat detail", 60: "Complete seascape with boat" }, colors: [{ name: "Sail White", hex: "#FFFACD" }, { name: "Ocean Blue", hex: "#2E7D99" }, { name: "Hull Shadow", hex: "#4A5568" }] },
+            { day: 15, title: "Seabird & Sky", description: "Paint birds in flight to add movement and context to your seascape.", timeReqs: { 15: "Sky wash", 30: "Bird placement", 45: "Wing detail", 60: "Full sky composition" }, colors: [{ name: "Clear Sky", hex: "#E0F4FF" }, { name: "Cloud Grey", hex: "#C0C0C0" }, { name: "Accent Purple", hex: "#9B7EAE" }] },
+            { day: 16, title: "Coral Reef Underwater", description: "Include a suggestion of underwater life below the surface.", timeReqs: { 15: "Surface-underwater split", 30: "Reef hints", 45: "Layered colors", 60: "Full reef depth" }, colors: [{ name: "Coral Pink", hex: "#FF7F50" }, { name: "Sea Green", hex: "#2A9B96" }, { name: "Ocean Depths", hex: "#003366" }] },
+            { day: 17, title: "Lighthouse & Storm", description: "Paint a dramatic seascape with a lighthouse against stormy skies.", timeReqs: { 15: "Lighthouse shape", 30: "Storm sky", 45: "Water drama", 60: "Full lighthouse scene" }, colors: [{ name: "Lighthouse Red", hex: "#E63946" }, { name: "Storm Grey", hex: "#556A7B" }, { name: "Dark Navy", hex: "#1A3A52" }] },
+            { day: 18, title: "Calm Morning Washes", description: "Focus on loose, flowing wet-on-wet washes.", timeReqs: { 15: "Initial wash", 30: "Soft mergings", 45: "Layered washes", 60: "Refined wet-on-wet" }, colors: [{ name: "Dawn Pink", hex: "#FFB6C1" }, { name: "Morning Blue", hex: "#B0E0E6" }, { name: "Pale Yellow", hex: "#FFFACD" }] },
+            { day: 19, title: "Tide Pools & Rocks", description: "Paint tide pools with reflective water and rocky terrain.", timeReqs: { 15: "Rock composition", 30: "Pool reflections", 45: "Detail work", 60: "Complete tide pool scene" }, colors: [{ name: "Pool Blue", hex: "#6FA8DC" }, { name: "Rock Brown", hex: "#8B6F47" }, { name: "Algae Green", hex: "#6B8E23" }] },
+            { day: 20, title: "Seascape with Clouds", description: "Paint dramatic cloud formations over the sea.", timeReqs: { 15: "Cloud shapes", 30: "Cloud shadow", 45: "Water-sky balance", 60: "Full dramatic composition" }, colors: [{ name: "Cloud White", hex: "#FFFFFF" }, { name: "Cloud Shadow", hex: "#D3D3D3" }, { name: "Ocean Blue", hex: "#2E7D99" }] },
+            { day: 21, title: "Seascape Silhouette", description: "Create a backlit seascape with silhouetted foreground.", timeReqs: { 15: "Glowing sky", 30: "Silhouette shapes", 45: "Contrast depth", 60: "Full dramatic silhouette" }, colors: [{ name: "Glow Orange", hex: "#FF8C42" }, { name: "Silhouette Black", hex: "#1A1A1A" }, { name: "Deep Water", hex: "#2C3E50" }] },
+            { day: 22, title: "Crashing Surf", description: "Paint explosive waves with dynamic brushwork.", timeReqs: { 15: "Wave crash", 30: "Spray lines", 45: "Energy detail", 60: "Full dynamic composition" }, colors: [{ name: "Sea Foam", hex: "#F0F8FF" }, { name: "Wave Green", hex: "#2D7A6E" }, { name: "Deep Navy", hex: "#0F1C3C" }] },
+            { day: 23, title: "Golden Sand Seascape", description: "Paint where golden sand plays a major role.", timeReqs: { 15: "Sand base", 30: "Water edge", 45: "Sand textures", 60: "Complete beach composition" }, colors: [{ name: "Golden Sand", hex: "#D4AF37" }, { name: "Sea Blue", hex: "#4A7BA7" }, { name: "Sand Shadow", hex: "#B8956A" }] },
+            { day: 24, title: "Seascape with Sky Drama", description: "Paint where the sky dominates with dramatic lighting.", timeReqs: { 15: "Sky foundation", 30: "Cloud drama", 45: "Sky texture", 60: "Full dramatic sky seascape" }, colors: [{ name: "Sky Purple", hex: "#B19CD9" }, { name: "Cloud Pink", hex: "#FFB3D9" }, { name: "Water Reflection", hex: "#6FA8DC" }] },
+            { day: 25, title: "Still Water Reflection", description: "Paint mirror-like water conditions.", timeReqs: { 15: "Mirror effect", 30: "Reflection detail", 45: "Symmetry play", 60: "Perfect reflective composition" }, colors: [{ name: "Reflection Blue", hex: "#A8C8E1" }, { name: "Sky Tone", hex: "#E8D5B3" }, { name: "Accent Navy", hex: "#1A3A52" }] },
+            { day: 26, title: "Seascape with Depth", description: "Focus on depth through layering and atmospheric perspective.", timeReqs: { 15: "Foreground layer", 30: "Middle distance", 45: "Background depth", 60: "Full layered depth" }, colors: [{ name: "Near Blue", hex: "#2E7D99" }, { name: "Mid Water", hex: "#5A9FC0" }, { name: "Distant Mist", hex: "#A8C8E1" }] },
+            { day: 27, title: "Seascape Texture Study", description: "Experiment with different brushmarks and techniques.", timeReqs: { 15: "Basic texture", 30: "Varied marks", 45: "Complex patterns", 60: "Full textured composition" }, colors: [{ name: "Base Blue", hex: "#4A90E2" }, { name: "Texture Brown", hex: "#8B7D6B" }, { name: "Highlight Gold", hex: "#D4AF37" }] },
+            { day: 28, title: "Coastal Wildlife Moment", description: "Include coastal wildlife interacting with their environment.", timeReqs: { 15: "Animal silhouette", 30: "Environmental context", 45: "Detail work", 60: "Full wildlife seascape" }, colors: [{ name: "Water Blue", hex: "#6FA8DC" }, { name: "Wildlife Brown", hex: "#5A4A42" }, { name: "Sky Accent", hex: "#E8D5B3" }] },
+            { day: 29, title: "Personal Seascape Vision", description: "Paint your own interpretation—let your style shine.", timeReqs: { 15: "Sketchy interpretation", 30: "Loose painting", 45: "Developed style", 60: "Polished personal vision" }, colors: [{ name: "Your Choice", hex: "#D4AF37" }, { name: "Your Choice", hex: "#1A3A52" }, { name: "Your Choice", hex: "#8B7D6B" }] },
+            { day: 30, title: "Celebration: Your Seascape Journey", description: "Reflect on your growth—paint a seascape representing your progress.", timeReqs: { 15: "Quick celebration", 30: "Intentional marks", 45: "Thoughtful composition", 60: "Masterful finale" }, colors: [{ name: "Victory Gold", hex: "#D4AF37" }, { name: "Deep Gratitude", hex: "#1A3A52" }, { name: "Proud Navy", hex: "#2D5A7B" }] }
+        ];
+
+        const quotes = [
+            "Practice is progress. Keep painting.",
+            "Every brushstroke is practice. Every painting teaches.",
+            "Progress over perfection, always.",
+            "You are building mastery, one wash at a time.",
+            "The ocean teaches patience. So does painting.",
+            "Your practice today shapes your art tomorrow.",
+            "Mistakes are data. Keep going.",
+            "You're stronger than you think.",
+            "Paint what calls to you.",
+            "Let nothing stop you from painting.",
+            "Every artist started exactly where you are.",
+            "Consistency beats perfection every time.",
+            "The water will forgive you. Trust it.",
+            "Your unique voice is emerging with each piece.",
+            "Celebrate the effort, not just the outcome.",
+            "Show up. The magic happens with repetition.",
+            "Your seascapes are getting better. Can you see it?",
+            "This challenge is shaping you into the artist you want to be."
+        ];
+
+        // State
+        let state = {
+            currentDay: 1,
+            selectedTime: null,
+            selectedMode: null,
+            selectedMood: "calm",
+            completedDays: JSON.parse(localStorage.getItem('completedDays')) || [],
+            timerActive: false,
+            timerSeconds: 0
+        };
+
+        function init() {
+            loadState();
+            renderProgressBar();
+            renderPrompt();
+            attachEventListeners();
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('challengeState');
+            if (saved) {
+                const savedState = JSON.parse(saved);
+                state.currentDay = Math.min(savedState.currentDay, 30);
+                state.completedDays = savedState.completedDays || [];
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('challengeState', JSON.stringify({
+                currentDay: state.currentDay,
+                completedDays: state.completedDays
+            }));
+        }
+
+        function attachEventListeners() {
+            document.querySelectorAll('.btn-time').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!this.disabled) {
+                        document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        state.selectedTime = parseInt(this.dataset.time);
+                        state.selectedMode = null;
+                        showModeSelection();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-mode').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    state.selectedMode = this.dataset.mode;
+                    if (state.selectedMode === 'inspire') {
+                        document.getElementById('moodCard').style.display = 'block';
+                    } else {
+                        document.getElementById('moodCard').style.display = 'none';
+                        state.selectedMood = null;
+                        renderPrompt();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-mood').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.btn-mood').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    state.selectedMood = this.dataset.mood;
+                    renderPrompt();
+                });
+            });
+        }
+
+        function showModeSelection() {
+            document.getElementById('modeCard').style.display = 'block';
+            document.getElementById('moodCard').style.display = 'none';
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('dailyQuote').textContent = randomQuote;
+        }
+
+        function getCurrentPrompt() {
+            return challenges[state.currentDay - 1];
+        }
+
+        function getReferencesForMoodAndTime() {
+            if (state.selectedMode === 'practice') {
+                const mood = ['calm', 'moody', 'aesthetic'][Math.floor(Math.random() * 3)];
+                const time = state.selectedTime;
+                return (referenceImages[mood] && referenceImages[mood][time]) || [];
+            }
+
+            const mood = state.selectedMood;
+            const time = state.selectedTime;
+            if (!mood || !time) return [];
+            return (referenceImages[mood] && referenceImages[mood][time]) || [];
+        }
+
+        function renderProgressBar() {
+            const percentage = (state.completedDays.length / 30) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = Math.round(percentage);
+            document.getElementById('currentDay').textContent = state.currentDay;
+            document.getElementById('streakCount').textContent = state.completedDays.length;
+        }
+
+        function renderPrompt() {
+            const prompt = getCurrentPrompt();
+            const container = document.getElementById('mainContent');
+
+            let html = '';
+
+            if (state.currentDay > 1 && !state.completedDays.includes(state.currentDay - 1)) {
+                html += `<div class="locked-badge">🔒 Complete Day ${state.currentDay - 1} to Unlock</div>`;
+                container.innerHTML = html;
+                return;
+            }
+
+            html += `<div class="prompt-title">Day ${state.currentDay}: ${prompt.title}</div>`;
+
+            if (state.selectedMood) {
+                html += `<div class="mood-badge">${state.selectedMood.charAt(0).toUpperCase() + state.selectedMood.slice(1)} Mood</div>`;
+            }
+
+            html += `<div class="prompt-text">${prompt.description}</div>`;
+
+            // Skills section for Practice mode
+            if (state.selectedMode === 'practice' && skillsByTime[state.selectedTime]) {
+                html += `<div class="time-allocation">
+                    <h4>🎯 Skills to Practice</h4>
+                    <div class="time-breakdown">
+                        <strong>${state.selectedTime} minutes:</strong><br>`;
+                skillsByTime[state.selectedTime].forEach(skill => {
+                    html += `• ${skill}<br>`;
+                });
+                html += `</div>
+                </div>`;
+            } else if (state.selectedTime) {
+                html += `<div class="time-allocation">
+                    <h4>⏰ Time Allocation</h4>
+                    <div class="time-breakdown">
+                        <strong>${state.selectedTime} minutes:</strong><br>${prompt.timeReqs[state.selectedTime] || ''}
+                    </div>
+                </div>`;
+            }
+
+            html += `<div class="timer-display" id="timerDisplay">
+                <div class="timer-time" id="timerTime">${state.selectedTime || 0}:00</div>
+                <div class="timer-label">Keep painting!</div>
+                <div class="timer-controls">
+                    <button onclick="pauseTimer()">Pause</button>
+                    <button onclick="resetTimer()">Reset</button>
+                </div>
+            </div>`;
+
+
+            const references = getReferencesForMoodAndTime();
+            if (references.length > 0) {
+                html += `<div class="reference-section">
+                    <h4>📸 Reference Inspiration</h4>
+                    <div class="reference-grid">`;
+
+                references.forEach(ref => {
+                    const photoId = ref.url.split('/photos/')[1];
+                    const imageUrl = `https://source.unsplash.com/${photoId}?w=500&q=80`;
+                    html += `<div class="reference-card">
+                        <a href="${ref.url}" target="_blank" style="text-decoration: none;">
+                            <div class="reference-image-wrapper">
+                                <img src="${imageUrl}" alt="Reference" onerror="this.style.display='none'">
+                            </div>
+                        </a>
+                        <div class="reference-info">
+                            <div class="reference-time">${ref.time}</div>
+                            <a href="${ref.url}" target="_blank" class="reference-link">View</a>
+                        </div>
+                    </div>`;
+                });
+
+                html += `</div></div>`;
+            }
+
+            html += `<div class="completion-message" id="completionMsg"></div>`;
+
+            html += `<div class="action-buttons">
+                <button class="btn-primary" id="startTimerBtn" onclick="startTimer()">Start Timer</button>
+                <button class="btn-secondary" id="completeBtn" onclick="completeDay()">Mark Complete</button>
+            </div>`;
+
+            container.innerHTML = html;
+
+            if (!state.selectedTime) {
+                document.getElementById('startTimerBtn').disabled = true;
+                document.getElementById('startTimerBtn').textContent = 'Select Time First';
+            }
+        }
+
+        function startTimer() {
+            if (!state.selectedTime) return;
+
+            state.timerSeconds = state.selectedTime * 60;
+            state.timerActive = true;
+
+            document.getElementById('timerDisplay').classList.add('active');
+            document.getElementById('startTimerBtn').disabled = true;
+
+            const timerInterval = setInterval(() => {
+                if (state.timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    state.timerActive = false;
+                    document.getElementById('startTimerBtn').disabled = false;
+                    playTimerComplete();
+                    return;
+                }
+
+                state.timerSeconds--;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            state.timerActive = false;
+            document.getElementById('startTimerBtn').disabled = false;
+        }
+
+        function resetTimer() {
+            state.timerActive = false;
+            state.timerSeconds = 0;
+            document.getElementById('timerDisplay').classList.remove('active');
+            document.getElementById('startTimerBtn').disabled = false;
+            renderPrompt();
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(state.timerSeconds / 60);
+            const secs = state.timerSeconds % 60;
+            document.getElementById('timerTime').textContent =
+                (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        function playTimerComplete() {
+            document.getElementById('timerDisplay').style.background = 'linear-gradient(135deg, #d4af37, #1a3a52)';
+            document.getElementById('timerDisplay').innerHTML = `
+                <div style="font-size: 2.5em; margin-bottom: 12px;">⏱️ Time's Up!</div>
+                <div class="timer-label">Great work! Ready to mark this complete?</div>
+            `;
+        }
+
+        function completeDay() {
+            if (!state.completedDays.includes(state.currentDay)) {
+                state.completedDays.push(state.currentDay);
+                saveState();
+            }
+
+            const msg = document.getElementById('completionMsg');
+            msg.classList.add('show');
+            msg.textContent = '🎉 Day ' + state.currentDay + ' Complete!';
+
+            celebrateCompletion();
+
+            setTimeout(() => {
+                if (state.currentDay < 30) {
+                    state.currentDay++;
+                    state.selectedTime = null;
+                    state.selectedMode = null;
+                    state.selectedMood = "calm";
+                    saveState();
+                    renderProgressBar();
+                    renderPrompt();
+                    document.getElementById('modeCard').style.display = 'none';
+                    document.getElementById('moodCard').style.display = 'none';
+                    document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.btn-mode').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.btn-mood').forEach(b => b.classList.remove('active'));
+                    document.querySelector('[data-mood="calm"]').classList.add('active');
+                } else {
+                    showChallengeComplete();
+                }
+            }, 2000);
+        }
+
+        function celebrateCompletion() {
+            const confetti = document.getElementById('confetti');
+            confetti.innerHTML = '';
+
+            const colors = ['#D4AF37', '#1A3A52', '#2A7DA3', '#4A90E2', '#FF6B9D', '#FF8C42'];
+
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.top = '-10px';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animation = `fall ${2 + Math.random() * 1.5}s linear forwards`;
+                confetti.appendChild(piece);
+            }
+        }
+
+        function showChallengeComplete() {
+            const container = document.getElementById('mainContent');
+            container.innerHTML = `
+                <div style="text-align: center; padding: 60px 40px;">
+                    <div style="font-size: 4em; margin-bottom: 20px;">🌊✨</div>
+                    <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2.5em; margin-bottom: 12px;">Challenge Complete!</h2>
+                    <p style="font-size: 1.2em; color: #666; margin-bottom: 25px;">You've completed all 30 days!</p>
+                    <p style="color: var(--text-dark); font-size: 1.05em; line-height: 2; margin-bottom: 40px;">
+                        You've painted 30 seascapes and proven your commitment to your craft.
+                        <br><br>
+                        <strong style="color: var(--navy); font-size: 1.15em;">"Let nothing stop you from painting."</strong>
+                    </p>
+                    <button class="btn-primary" onclick="resetChallenge()" style="padding: 14px 36px; font-size: 0.95em;">Start New Challenge</button>
+                </div>
+            `;
+        }
+
+        function resetChallenge() {
+            if (confirm('Start a new 30-day challenge?')) {
+                state.currentDay = 1;
+                state.selectedTime = null;
+                state.selectedMode = null;
+                state.selectedMood = "calm";
+                state.completedDays = [];
+                saveState();
+                renderProgressBar();
+                renderPrompt();
+                document.getElementById('modeCard').style.display = 'none';
+                document.getElementById('moodCard').style.display = 'none';
+                document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.btn-mode').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.btn-mood').forEach(b => b.classList.remove('active'));
+                document.querySelector('[data-mood="calm"]').classList.add('active');
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
